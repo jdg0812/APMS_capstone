@@ -12,14 +12,13 @@ import sqlite3
 app = Flask(__name__)
 
 with open('config.yml', 'r') as f:
-        config = yaml.safe_load(f)
+    config = yaml.safe_load(f)
 
 model = joblib.load('base_rf_pipe.joblib')
 
 
-
 @app.route('/')
-def index(): 
+def index():
     return render_template('index.html')
 
 
@@ -34,19 +33,20 @@ def train():
     conn.close()
     col_names = config['col_names']
     train = pd.DataFrame(data, columns=col_names)
-    
-    rul = pd.read_csv('CMAPSSDATA/RUL_FD001.txt',sep='\s+',header=None,index_col=False,names=['RUL'])
+
+    rul = pd.read_csv('CMAPSSDATA/RUL_FD001.txt', sep='\s+',
+                      header=None, index_col=False, names=['RUL'])
     train = add_RUL_column(train)
 
     drop_labels = config['index_names']+config['setting_names']
-    X_train=train.drop(columns=drop_labels).copy()
+    X_train = train.drop(columns=drop_labels).copy()
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X_train.drop('RUL', axis=1), #predictor
-        X_train['RUL'], #target
-        test_size=0.3, #split
-        random_state=0) #set seed for reproducibility
-    
+        X_train.drop('RUL', axis=1),  # predictor
+        X_train['RUL'],  # target
+        test_size=0.3,  # split
+        random_state=0)  # set seed for reproducibility
+
     model.fit(X_train, y_train)
     pred_train = model.predict(X_train)
     train_rmse = np.sqrt(mean_squared_error(y_train, pred_train))
@@ -59,5 +59,5 @@ def train():
     return render_template('index.html', train_rmse=train_rmse, train_r2=train_r2, train_mae=train_mae, test_rmse=test_rmse, test_r2=test_r2, test_mae=test_mae)
 
 
-if __name__ == '__main__': 
+if __name__ == '__main__':
     app.run(debug=True)

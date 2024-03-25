@@ -1,15 +1,15 @@
 import sqlite3
+import pandas as pd
+import yaml
 
 conn = sqlite3.connect('cmapss_dataset.db')
 cursor = conn.cursor()
 
-import pandas as pd
-import yaml
-
 with open('config.yml', 'r') as f:
-        config = yaml.safe_load(f)
+    config = yaml.safe_load(f)
 col_names = config['col_names']
-df = pd.read_csv('CMAPSSData/train_FD001.txt',sep='\s+',header=None,index_col=False,names=col_names)
+df = pd.read_csv('CMAPSSData/train_FD001.txt', sep='\s+',
+                 header=None, index_col=False, names=col_names)
 
 create_table_query = '''
 CREATE TABLE IF NOT EXISTS cmapss_dataset (
@@ -56,7 +56,7 @@ for index, row in df.iterrows():
 # cursor.execute(select_query)
 # results = cursor.fetchall()
 
-# for row in results: 
+# for row in results:
 #     print(row)
 
 conn.commit()
