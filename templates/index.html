@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APMS</title>
+</head>
+<body>
+    <h1>APMS</h1>
+    <p>AMPS integrates a Random Forest ML Pipeline to predict RUl of Aircraft Engines for Predictive Maintenance</p>
+    <form action="/train" method="post">
+    <label for="train_set">Training On: </label>
+    <input type="text" id="train_set" name="train_set" value="train_FD001.txt">
+    <input type="submit" value="Train">
+    </form>
+    <br> 
+
+    <table border="1">
+        <tr>
+          <th>Dataset</th>
+          <th>RMSE</th>
+          <th>R2 Score</th>
+          <th>MAE</th>
+        </tr>
+        <tr>
+          <td>Train</td>
+          <td>{{ train_rmse }}</td>
+          <td>{{ train_r2 }}</td>
+          <td>{{ train_mae }}</td>
+        </tr>
+        <tr>
+          <td>Test</td>
+          <td>{{ test_rmse }}</td>
+          <td>{{ test_r2 }}</td>
+          <td>{{ test_mae }}</td>
+        </tr>
+      </table>
+    <br>
+
+</body>
+</html>
