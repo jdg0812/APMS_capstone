@@ -7,9 +7,8 @@ import yaml
 from settings import add_RUL_column
 from sklearn.model_selection import train_test_split
 import sqlite3
+from config import app 
 
-
-app = Flask(__name__)
 
 with open('config.yml', 'r') as f:
     config = yaml.safe_load(f)
