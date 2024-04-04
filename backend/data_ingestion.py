@@ -1,6 +1,7 @@
 import sqlite3
 import pandas as pd
 import yaml
+from settings import add_RUL_column
 
 conn = sqlite3.connect('cmapss_dataset.db')
 cursor = conn.cursor()
@@ -10,6 +11,9 @@ with open('config.yml', 'r') as f:
 col_names = config['col_names']
 df = pd.read_csv('CMAPSSData/train_FD001.txt', sep='\s+',
                  header=None, index_col=False, names=col_names)
+rul = pd.read_csv('CMAPSSDATA/RUL_FD001.txt', sep='\s+',
+                      header=None, index_col=False, names=['RUL'])
+df_with_rul = add_RUL_column(df)
 
 create_table_query = '''
 CREATE TABLE IF NOT EXISTS cmapss_dataset (
@@ -38,19 +42,19 @@ CREATE TABLE IF NOT EXISTS cmapss_dataset (
     sensor_18 REAL,
     sensor_19 REAL,
     sensor_20 REAL,
-    sensor_21 REAL
+    sensor_21 REAL, 
+    RUL INTEGER
 )
 '''
 
 cursor.execute(create_table_query)
 
-for index, row in df.iterrows():
+for index, row in df_with_rul.iterrows():
     insert_query = '''
-    INSERT INTO cmapss_dataset VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    INSERT INTO cmapss_dataset VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
     '''
     data_tuple = tuple(row)
     cursor.execute(insert_query, data_tuple)
-
 
 # select_query = "SELECT * FROM cmapss_dataset"
 # cursor.execute(select_query)

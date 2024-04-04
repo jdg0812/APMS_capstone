@@ -59,6 +59,7 @@ col_names:
   - s_19
   - s_20
   - s_21
+  - RUL
 
 sensor_dictionary:
   s_1: "(Fan inlet temperature) (◦R)"

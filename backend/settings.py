@@ -12,4 +12,6 @@ def add_RUL_column(df):
     
     #drop max cycle as it's no longer needed
     merged = merged.drop("max_time_cycle", axis=1) 
+
+    
     return merged

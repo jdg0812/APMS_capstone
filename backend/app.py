@@ -31,11 +31,8 @@ def train():
     data = c.fetchall()
     conn.close()
     col_names = config['col_names']
-    train = pd.DataFrame(data, columns=col_names)
-
-    rul = pd.read_csv('CMAPSSDATA/RUL_FD001.txt', sep='\s+',
-                      header=None, index_col=False, names=['RUL'])
-    train = add_RUL_column(train)
+    train = pd.DataFrame(data, columns=[col_names])
+    
 
     drop_labels = config['index_names']+config['setting_names']
     X_train = train.drop(columns=drop_labels).copy()
@@ -45,7 +42,7 @@ def train():
         X_train['RUL'],  # target
         test_size=0.3,  # split
         random_state=0)  # set seed for reproducibility
-
+    
     model.fit(X_train, y_train)
     pred_train = model.predict(X_train)
     train_rmse = np.sqrt(mean_squared_error(y_train, pred_train))
