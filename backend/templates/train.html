@@ -8,21 +8,10 @@
 <body>
     <h1>APMS</h1>
     <p>AMPS integrates a Random Forest ML Pipeline to predict RUl of Aircraft Engines for Predictive Maintenance</p>
-    <form action="/train" method="post">
-      <label for = "model">Select Model:</label>
-      <select name = "model" id="model">
-        <option value="rf">Random Forest</option>
-      </select>
-      <br>
-      <label for = "selection">Select Feature Selection Method:</label>
-      <select name="selection" id="selection">
-        <option value="base">Base</option>
-        <option value="corr">Correlation</option>
-      </select>
-    <input type="submit" value="Train">
-    </form>
+    <h2>Selected Model {{ model }} and Feature Selection {{ selection }}</h2>
+    <a href="/">Back</a>
     <br> 
-
+    <br>
     <table border="1">
         <tr>
           <th>Dataset</th>
