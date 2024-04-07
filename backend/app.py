@@ -7,6 +7,7 @@ import yaml
 from settings import add_RUL_column
 from sklearn.model_selection import train_test_split
 from feature_selection import RemoveCorrelatedFeatures
+from settings import Linear_Regression
 import sqlite3
 from config import app 
 
@@ -53,7 +54,17 @@ def train():
             ml_pipe = joblib.load('rf_correlation.pkl')
         else: 
             return "Invalid selection"
-    else: 
+    elif model == 'svr':
+        if selection == 'base': 
+            ml_pipe = joblib.load('SVR_base.pkl')
+        else: 
+            return "Invalid selection"
+    elif model == 'lr':
+        if selection == 'base': 
+            ml_pipe = joblib.load('lr_base.pkl')
+        else: 
+            return "Invalid selection"
+    else:    
         return "Invalid model"
     
     ml_pipe.fit(X_train, y_train)
@@ -68,9 +79,9 @@ def train():
     return render_template('train.html', model = model, selection=selection, train_rmse=train_rmse, train_r2=train_r2, train_mae=train_mae, test_rmse=test_rmse, test_r2=test_r2, test_mae=test_mae)
 
 #testing react + flask communication
-@app.route('/test_data')
-def test_data(): 
-    return {'test': ['test1', 'test2', 'test3']}
+@app.route('/score')
+def score(): 
+    return 
 
 if __name__ == '__main__':
     app.run(debug=True)
