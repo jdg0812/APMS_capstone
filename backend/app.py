@@ -9,7 +9,9 @@ from sklearn.model_selection import train_test_split
 from feature_selection import RemoveCorrelatedFeatures
 from settings import Linear_Regression
 import sqlite3
-from config import app 
+#from config import app 
+
+app = Flask(__name__)
 
 
 with open('config.yml', 'r') as f:
