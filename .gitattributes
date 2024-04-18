@@ -1,1 +1,6 @@
 base_rf_pipe.joblib filter=lfs diff=lfs merge=lfs -text
+<<<<<<< Updated upstream
+=======
+*.pkl filter=lfs diff=lfs merge=lfs -text
+backend/svr_correlation.pkl filter=lfs diff=lfs merge=lfs -text
+>>>>>>> Stashed changes
