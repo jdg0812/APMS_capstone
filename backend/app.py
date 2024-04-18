@@ -6,6 +6,7 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import yaml
 from settings import add_RUL_column
 from sklearn.model_selection import train_test_split
+from feature_selection import RemoveCorrelatedFeatures
 import sqlite3
 from config import app 
 
@@ -13,7 +14,7 @@ from config import app
 with open('config.yml', 'r') as f:
     config = yaml.safe_load(f)
 
-model = joblib.load('base_rf_pipe.joblib')
+
 
 
 @app.route('/')
@@ -43,16 +44,28 @@ def train():
         test_size=0.3,  # split
         random_state=0)  # set seed for reproducibility
     
-    model.fit(X_train, y_train)
-    pred_train = model.predict(X_train)
+    model = request.form['model']
+    selection = request.form['selection']
+    if model == 'rf': 
+        if selection == 'base': 
+            ml_pipe = joblib.load('base_rf_pipe.joblib')
+        elif selection == 'corr': 
+            ml_pipe = joblib.load('rf_correlation.pkl')
+        else: 
+            return "Invalid selection"
+    else: 
+        return "Invalid model"
+    
+    ml_pipe.fit(X_train, y_train)
+    pred_train = ml_pipe.predict(X_train)
     train_rmse = np.sqrt(mean_squared_error(y_train, pred_train))
     train_r2 = r2_score(y_train, pred_train)
     train_mae = mean_absolute_error(y_train, pred_train)
-    pred_test = model.predict(X_test)
+    pred_test = ml_pipe.predict(X_test)
     test_rmse = np.sqrt(mean_squared_error(y_test, pred_test))
     test_r2 = r2_score(y_test, pred_test)
     test_mae = mean_absolute_error(y_test, pred_test)
-    return render_template('index.html', train_rmse=train_rmse, train_r2=train_r2, train_mae=train_mae, test_rmse=test_rmse, test_r2=test_r2, test_mae=test_mae)
+    return render_template('train.html', model = model, selection=selection, train_rmse=train_rmse, train_r2=train_r2, train_mae=train_mae, test_rmse=test_rmse, test_r2=test_r2, test_mae=test_mae)
 
 #testing react + flask communication
 @app.route('/test_data')
