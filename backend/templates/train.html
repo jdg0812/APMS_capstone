@@ -12,6 +12,7 @@
     <a href="/">Back</a>
     <br> 
     <br>
+    <h2>Training Results</h2>
     <table border="1">
         <tr>
           <th>Dataset</th>
@@ -33,6 +34,71 @@
         </tr>
       </table>
     <br>
-
+    <br>
+    <h2> Scoring </h2>
+    <form action="/score" method="post">
+        <label for = "s_1">Fan inlet tempearture (◦R)</label>
+        <input type="number" id="s_1" name="s_1" value= "">
+        <br>
+        <label for = "s_2">LPC outlet temperature (◦R)</label>
+        <input type="number" id="s_2" name="s_2" value= "">
+        <br>
+        <label for = "s_3">HPC outlet temperature (◦R)</label>
+        <input type="number" id="s_3" name="s_3" value= "">
+        <br>
+        <label for = "s_4">LPT outlet temperature (◦R)</label>
+        <input type="number" id="s_4" name="s_4" value= "">
+        <br>
+        <label for = "s_5">Fan inlet Pressure (psia)</label>
+        <input type="number" id="s_5" name="s_5" value= "">
+        <br>
+        <label for="s_6">Bypass-duct pressure (psia)</label>
+        <input type="number" id="s_6" name="s_6" value="">
+        <br>
+        <label for="s_7">HPC outlet pressure (psia)</label>
+        <input type="number" id="s_7" name="s_7" value="">
+        <br>
+        <label for="s_8">Physical fan speed (rpm)</label>
+        <input type="number" id="s_8" name="s_8" value="">
+        <br>
+        <label for="s_9">Physical core speed (rpm)</label>
+        <input type="number" id="s_9" name="s_9" value="">
+        <br>
+        <label for="s_10">Engine pressure ratio(P50/P2)</label>
+        <input type="number" id="s_10" name="s_10" value="">
+        <br>
+        <label for="s_11">HPC outlet Static pressure (psia)</label>
+        <input type="number" id="s_11" name="s_11" value="">
+        <br>
+        <label for="s_12">Ratio of fuel flow to Ps30 (pps/psia)</label>
+        <input type="number" id="s_12" name="s_12" value="">
+        <br>
+        <label for="s_13">Corrected fan speed (rpm)</label>
+        <input type="number" id="s_13" name="s_13" value="">
+        <br>
+        <label for="s_14">Corrected core speed (rpm)</label>
+        <input type="number" id="s_14" name="s_14" value="">
+        <br>
+        <label for="s_15">Bypass Ratio</label>
+        <input type="number" id="s_15" name="s_15" value="">
+        <br>
+        <label for="s_16">Burner fuel-air ratio</label>
+        <input type="number" id="s_16" name="s_16" value="">
+        <br>
+        <label for="s_17">Bleed Enthalpy</label>
+        <input type="number" id="s_17" name="s_17" value="">
+        <br>
+        <label for="s_18">Required fan speed</label>
+        <input type="number" id="s_18" name="s_18" value="">
+        <br>
+        <label for="s_19">Required fan conversion speed</label>
+        <input type="number" id="s_19" name="s_19" value="">
+        <br>
+        <label for="s_20">High-pressure turbines Cool air flow</label>
+        <input type="number" id="s_20" name="s_20" value="">
+        <br>
+        <label for="s_21">Low-pressure turbines Cool air flow</label>
+        <input type="number" id="s_21" name="s_21" value="">
+        <input type = "submit" value = "Predict">
 </body>
 </html>
