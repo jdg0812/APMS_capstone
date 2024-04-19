@@ -56,9 +56,9 @@ def train():
     selection = request.form['selection']
     if model == 'rf': 
         if selection == 'base': 
-            ml_pipe = joblib.load('base_rf_pipe.joblib')
+            ml_pipe = joblib.load('RF_base.joblib')
         elif selection == 'corr': 
-            ml_pipe = joblib.load('rf_correlation.pkl')
+            ml_pipe = joblib.load('RF_correlation.pkl')
         else: 
             return "Invalid selection"
     elif model == 'svr':
@@ -70,9 +70,9 @@ def train():
             return "Invalid selection"
     elif model == 'lr':
         if selection == 'base': 
-            ml_pipe = joblib.load('lr_base.pkl')
+            ml_pipe = joblib.load('LR_base.pkl')
         elif selection == "corr":
-            ml_pipe = joblib.load('lr_correlation.pkl')
+            ml_pipe = joblib.load('LR_correlation.pkl')
         else: 
             return "Invalid selection"
     else:    
