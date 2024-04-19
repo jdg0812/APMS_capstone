@@ -34,15 +34,21 @@ def train():
     data = c.fetchall()
     conn.close()
     col_names = config['col_names']
-    train = pd.DataFrame(data, columns=[col_names])
+    #train = pd.DataFrame(data, columns=[col_names])
     
 
-    drop_labels = config['index_names']+config['setting_names']
-    X_train = train.drop(columns=drop_labels).copy()
+    drop_indices = [col_names.index(label) for label in config['index_names'] + config['setting_names']]
+    #X_train = train.drop(columns=drop_labels).copy()
+
+    X_train = np.array([row[:-11] for row in data])
+    y_train = np.array([row[-1] for row in data])
+
+    X_train = np.delete(X_train, drop_indices, axis=1)
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X_train.drop('RUL', axis=1),  # predictor
-        X_train['RUL'],  # target
+        #X_train.drop('RUL', axis=1),  # predictor
+        #X_train['RUL'],  # target
+        X_train, y_train,
         test_size=0.3,  # split
         random_state=0)  # set seed for reproducibility
     
@@ -58,11 +64,15 @@ def train():
     elif model == 'svr':
         if selection == 'base': 
             ml_pipe = joblib.load('SVR_base.pkl')
+        elif selection == 'corr': 
+            ml_pipe = joblib.load('SVR_correlation.pkl')
         else: 
             return "Invalid selection"
     elif model == 'lr':
         if selection == 'base': 
             ml_pipe = joblib.load('lr_base.pkl')
+        elif selection == "corr":
+            ml_pipe = joblib.load('lr_correlation.pkl')
         else: 
             return "Invalid selection"
     else:    
