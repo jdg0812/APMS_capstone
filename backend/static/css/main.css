@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #bebcbc;
+}
+
+.navbar {
+    background-color: #0000FF;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navbar ul li {
+    float: left;
+}
+
+.navbar ul li a, 
+.nabar ul li h1 {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navbar ul li h1 {
+    margin: 5px; /* Remove default margin for <h1> */
+    color: white;
+    margin-right: 10px;
+  }
+
+.navbar ul li a:hover {
+    background-color: #555;
+}
+
+.search-bar {
+    margin: 10px 0;
+    padding: 8px 12px; /* Adjust padding for better appearance */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Adjust the value to control the roundness */
+    outline: none; /* Remove outline on focus */
+}
+
+.dashboard-header {
+    background-color: white;
+    padding: 10px;
+}
+
+button {
+    font-size: 12px; 
+    border-radius: 10px; 
+    padding: 5px;
+    text-align: left;
+    width: 200px;
+    background-color: #dcdbdb;
+}  
+  /* Profile icon styling */
+  .navbar-icon {
+    width: 40px;
+    height: 40px;
+    background-color: #007bff;
+    border-radius: 50%; /* Make it round */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    font-size: 18px;
+    margin: 5px;
+  }
+
+
+  #model, #selection{
+    font-size: 12px; 
+    border-radius: 10px; 
+    padding: 5px;
+    width: 200px;
+    background-color: #dcdbdb;
+  }
+
+
+  .metric-item {
+    background-color: white; /* Set white background */
+    border-radius: 8px; /* Add rounded corners */
+    padding: 10px; /* Add padding for spacing */
+    display: inline-block; /* Display items in a row horizontally */
+    margin-right: 10px; /* Add right margin between items */
+    margin-left: 10px;
+  }
+  

@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APMS</title>
+    <link type = "text/css" rel = "stylesheet" href = "{{ url_for('static', filename = 'css/main.css') }}">
+    
 </head>
 <body>
+    
+
+
     <h1>APMS</h1>
     <p>AMPS integrates a Random Forest ML Pipeline to predict RUl of Aircraft Engines for Predictive Maintenance</p>
     <h2>Selected Model {{ model }} and Feature Selection {{ selection }}</h2>

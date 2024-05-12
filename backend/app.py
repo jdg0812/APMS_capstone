@@ -56,7 +56,7 @@ def train():
     selection = request.form['selection']
     if model == 'rf': 
         if selection == 'base': 
-            ml_pipe = joblib.load('RF_base.joblib')
+            ml_pipe = joblib.load('RF_base.pkl')
         elif selection == 'corr': 
             ml_pipe = joblib.load('RF_correlation.pkl')
         else: 
@@ -87,7 +87,7 @@ def train():
     test_rmse = np.sqrt(mean_squared_error(y_test, pred_test))
     test_r2 = r2_score(y_test, pred_test)
     test_mae = mean_absolute_error(y_test, pred_test)
-    return render_template('train.html', model = model, selection=selection, train_rmse=train_rmse, train_r2=train_r2, train_mae=train_mae, test_rmse=test_rmse, test_r2=test_r2, test_mae=test_mae)
+    return render_template('index.html', model = model, selection=selection, train_rmse=train_rmse, train_r2=train_r2, train_mae=train_mae, test_rmse=test_rmse, test_r2=test_r2, test_mae=test_mae)
 
 #testing react + flask communication
 @app.route('/score')
