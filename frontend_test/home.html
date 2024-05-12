@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+    <title>APMS</title>
+</head>
+<body>
+    <div id = "app"></div>
+    <script type="text/babel"> 
+        class AMPS extends React.Component {
+            render(){
+                return(
+                    <div>
+                    <h1>Aircraft Predictive Maintenance System </h1>
+                    <label for='model'>Model</label> 
+                    <select name='model'id='model'>
+                        <option value='RF'>Random Forest</option>
+                        <option value='LR'>Linear Regression</option>
+                        <option value='SVR'>Support Vector Regression</option>
+                    </select>
+                    <label for='selection'>Feature Selection</label>
+                    <select name='selection' id='selection'>
+                        <option value='base'>None</option>
+                        <option value='corr'>Correlation</option>
+                        <option value='lasso'>Lasso</option> 
+                        <option value='rand'>Random Forest</option>
+                    </select> 
+                    <label for='score'>Score Data </label>
+                    <input type='file' name='score' id='score'/>
+                    
+                    </div>
+                
+                );
+            }
+
+          
+        }
+
+
+        class Metrics extends React.Component {
+                
+            constructor(props) {
+                super(props);
+                this.state = {
+                    rul: 0, 
+                    rmse: 0,
+                    rsquared: 0, 
+                    mae: 0
+                }; 
+            }
+
+            render(){
+                return(
+                    <div>
+                        <AMPS/>
+                        <br/>
+                        <button onClick={this.training}>Train</button>
+                        <br/>
+                        <div>
+                            <h2>RUL</h2>
+                            <p>{this.state.rul}</p> 
+                            <h2>RMSE</h2>
+                            <p> {this.state.rmse} </p> 
+                            <h2>RSQUARED</h2>
+                            <p> {this.state.rsquared}</p>
+                            <h2> MAE </h2> 
+                            <p> {this.state.mae}</p>
+                            
+                        </div>    
+                    </div>
+                );
+            }
+            
+            training = () => {
+                this.setState(state => ({
+                        rul: 100, 
+                        rmse: 0.5,
+                        rsquared: 0.9,
+                        mae: 0.3
+                }));
+            }
+        }
+
+
+        ReactDOM.render(<Metrics/>, document.querySelector('#app')); 
+    </script>
+</body>
+</html>
